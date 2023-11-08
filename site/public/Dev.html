@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"
+        integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link href="../Site - Axia/assets/img/a.png" rel="icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Axia | Cadastro Dev</title>
+    <link rel="stylesheet" href="assets/css/dev.css">
+</head>
+
+<body class="bodyD">
+    <a href="Login.html">Acessar o Login</a>
+    <div class="veen">
+        <div class="login-btn splits">
+            <h1 class="claro">Empresa</h1>
+            <button class="btnDev active">Cadastrar</button>
+        </div>
+        <div class="rgstr-btn splits">
+            <h1 class="claro">Gestor</h1>
+            <button class="btnDev">Cadastrar</button>
+        </div>
+        <div class="wrapper">
+            <form id="login" tabindex="500">
+                <h1>Cadastrar Empresa</h1>
+
+                <div class="input-div one">
+                    <div class="iLogin">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="div">
+                        <h5>Razão Social/Nome Fantasia</h5>
+                        <input id="nomeEmpresa" type="text" class="input">
+                    </div>
+                </div>
+
+                <div class="input-div one">
+                    <div class="iLogin">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="div">
+                        <h5>E-mail Corporativo</h5>
+                        <input id="emailEmpresa" type="text" class="input">
+                    </div>
+                </div>
+
+                <div class="input-div one">
+                    <div class="iLogin">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="div">
+                        <h5>CNPJ <b style="font-size:12px;">(sem ponto, traço ou barra)</b></h5>
+                        <input id="cnpjEmpresa" type="text" class="input">
+                    </div>
+                </div>
+
+                <div class="submit">
+                    <button onclick="cadastrarEmpresa()" class="btnLogin">Cadastrar</button>
+                    <!-- <button type="submit" class="btnLogin">Cadastrar</button> -->
+                </div>
+            </form>
+
+            <form id="register" tabindex="502">
+
+                <h1>Gestor</h1>
+                <br>
+                <div class="input-div one">
+
+                    <div class="div">
+                        <h5>Nome</h5>
+                        <input id="inpNome" type="text" class="input">
+                    </div>
+                </div>
+                <div class="input-div one">
+                    <div class="divSecreta">
+                    </div>
+                    <div class="div">
+                        <h5>E-mail</h5>
+                        <input id="inpEmail" type="text" class="input">
+                    </div>
+                </div>
+                <div class="input-div pass">
+                    <div class="divSecreta">
+                    </div>
+                    <div class="div">
+                        <h5>Senha</h5>
+                        <input id="inpSenha" type="password" class="input">
+                    </div>
+                    <div class="input-div one">
+                        <div class="divSecreta">
+                        </div>
+                        <div class="div">
+                        <h5>Empresa Representante (fkEmpresa)</h5>
+                        <input id="inpfk" type="password" class="input">
+                    </div>
+                    </div>
+                </div>
+                <br>
+                <div class="submit">
+                    <button onclick="cadastrarDev()" class="btnLogin">Cadastrar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <style type="text/css">
+        .site-link {
+            padding: 5px 15px;
+            position: fixed;
+            z-index: 99999;
+            background: #fff;
+            box-shadow: 0 0 4px rgba(0, 0, 0, .14), 0 4px 8px rgba(0, 0, 0, .28);
+            right: 30px;
+            bottom: 30px;
+            border-radius: 10px;
+        }
+
+        .site-link img {
+            width: 30px;
+            height: 30px;
+        }
+    </style>
+</body>
+
+</html>
+<script src="./assets/js/cadastro.js"></script>
+<script>
+    $(document).ready(function () {
+        $(".veen .rgstr-btn button").click(function () {
+            $('.veen .wrapper').addClass('move');
+            $('.body').css('background', '#e0b722');
+            $(".veen .login-btn button").removeClass('active');
+            $(this).addClass('active');
+
+        });
+        $(".veen .login-btn button").click(function () {
+            $('.veen .wrapper').removeClass('move');
+            $('.body').css('background', '#ff4931');
+            $(".veen .rgstr-btn button").removeClass('active');
+            $(this).addClass('active');
+        });
+    });
+    const inputs = document.querySelectorAll(".input");
+
+
+    function addcl() {
+        let parent = this.parentNode.parentNode;
+        parent.classList.add("focus");
+    }
+
+    function remcl() {
+        let parent = this.parentNode.parentNode;
+        if (this.value == "") {
+            parent.classList.remove("focus");
+        }
+    }
+
+
+    inputs.forEach(input => {
+        input.addEventListener("focus", addcl);
+        input.addEventListener("blur", remcl);
+    });
+
+    // function cadastrarEmpresa() {
+        
+    //     Event.preventDefault()
+
+    //     //Recupere o valor da nova input pelo nome do id
+    //     // Agora vá para o método fetch logo abaixo
+    //     const nomeEmpresaVar = nomeEmpresa.value;
+    //     const emailEmpresaVar = emailEmpresa.value;
+    //     const cnpjEmpresaVar = cnpjEmpresa.value;
+    //     // Enviando o valor da nova input
+    //     fetch("/usuarios/cadastrarEmpresa", {
+    //         method: "POST",
+    //         headers: {
+    //             "Content-Type": "application/json"
+    //         },
+    //         body: JSON.stringify({
+    //             // crie um atributo que recebe o valor recuperado aqui
+    //             // Agora vá para o arquivo routes/usuario.js
+    //             nomeEmpresaServer: nomeEmpresaVar,
+    //             emailEmpresaServer: emailEmpresaVar,
+    //             cnpjEmpresaServer: cnpjEmpresaVar,
+    //         })
+    //     }).then(function (resposta) {
+
+    //         console.log("resposta: ", resposta);
+
+    //         if (resposta.ok) {
+    //             alert(`Cadastro da empresa ${nomeEmpresaVar} realizado com sucesso!`)
+    //             location.href = "www.google.com"
+    //         }
+
+    //     }).catch(function (resposta) {
+    //         console.log(`#ERRO: ${resposta}`);
+
+    //     });
+
+    //     return false;
+    // }
+</script>
